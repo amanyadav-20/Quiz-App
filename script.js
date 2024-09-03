@@ -8,7 +8,6 @@ const startBtn = document.querySelector('.startBtn');
 const timer = document.querySelector('.timer');
 
 
-// Make an array of objects that stores question, choices of question and answer
 const quiz = [
     {
         question: "Q. Which of the following is not a CSS box model property?",
@@ -32,14 +31,12 @@ const quiz = [
     }
 ];
 
-// Making Variables
 let currentQuestionIndex = 0;
 let score = 0;
 let quizOver = false;
 let timeLeft = 15;
 let timerID = null;
 
-// Arrow Function to Show Questions
 const showQuestions = () => {
     const questionDetails = quiz[currentQuestionIndex];
     questionBox.textContent = questionDetails.question;
@@ -67,16 +64,15 @@ const showQuestions = () => {
     }
 }
 
-// Function to check answers
 const checkAnswer = () => {
     const selectedChoice = document.querySelector('.choice.selected');
     if (selectedChoice.textContent === quiz[currentQuestionIndex].answer) {
-        // alert("Correct Answer!");
+        
         displayAlert("Correct Answer!");
         score++;
     }
     else {
-        // alert("Wrong answer");
+        
         displayAlert(`Wrong Answer! ${quiz[currentQuestionIndex].answer} is the Correct Answer`);
     }
     timeLeft = 15;
@@ -90,7 +86,6 @@ const checkAnswer = () => {
     }
 }
 
-// Function to show score
 const showScore = () => {
     questionBox.textContent = "";
     choicesBox.textContent = "";
@@ -101,7 +96,7 @@ const showScore = () => {
     timer.style.display = "none";
 }
 
-// Function to Show Alert
+
 const displayAlert = (msg) => {
     alert.style.display = "block";
     alert.textContent = msg;
@@ -110,9 +105,9 @@ const displayAlert = (msg) => {
     }, 2000);
 }
 
-// Function to Start Timer
+
 const startTimer = () => {
-    clearInterval(timerID); // Check for any exist timers
+    clearInterval(timerID); 
     timer.textContent = timeLeft;
 
     const countDown = ()=>{
@@ -134,12 +129,12 @@ const startTimer = () => {
     timerID = setInterval(countDown, 1000);
 }
 
-// Function to Stop Timer
+
 const stopTimer = () =>{
     clearInterval(timerID);
 }
 
-// Function to shuffle question
+
 const shuffleQuestions = () =>{
     for(let i=quiz.length-1; i>0; i--){
         const j = Math.floor(Math.random() * (i+1));
@@ -149,14 +144,14 @@ const shuffleQuestions = () =>{
     showQuestions();
 }
 
-// Function to Start Quiz
+
 const startQuiz = () =>{
     timeLeft = 15;
     timer.style.display = "flex";
     shuffleQuestions();
 }
 
-// Adding Event Listener to Start Button
+
 startBtn.addEventListener('click', ()=>{
     startBtn.style.display = "none";
     container.style.display = "block";
@@ -166,7 +161,7 @@ startBtn.addEventListener('click', ()=>{
 nextBtn.addEventListener('click', () => {
     const selectedChoice = document.querySelector('.choice.selected');
     if (!selectedChoice && nextBtn.textContent === "Next") {
-        // alert("Select your answer");
+        
         displayAlert("Select your answer");
         return;
     }
